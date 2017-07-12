@@ -1,13 +1,9 @@
-module.exports = function(metaVars = ['version']) {
+module.exports = function(metaVars = ['npm_package_version']) {
   const retObject = {};
   for (meta of metaVars) {
-    retObject[meta] = getEnvVar(meta);
+    retObject[meta] = process.env[meta];
   }
   return function(req, res) {
     res.json(retObject);
   }
-}
-
-function getEnvVar(varName) {
-  return process.env['npm_package_'+varName];
 }
